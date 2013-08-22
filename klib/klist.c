@@ -21,3 +21,16 @@ KNode *k_node_free(KNode *node) {
   free(node);
   return NULL;
 }
+
+
+// Initialize a KList.
+KList k_list_init() {
+  KList list;
+  list.head = NULL;
+  list.last = NULL;
+  list.sentinel.data = NULL;
+  list.sentinel.prev = NULL;
+  list.sentinel.next = NULL;
+  list.length = 0;
+  return list;
+}

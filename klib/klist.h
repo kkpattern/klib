@@ -21,4 +21,16 @@ KNode *k_node_alloc();
 KNode *k_node_free(KNode *node);
 
 
+typedef struct _KList {
+  KNode *head;
+  KNode *last;
+  KNode sentinel;
+  int length;
+} KList;
+
+
+// Initialize a KList.
+KList k_list_init();
+
+
 #endif
