@@ -26,9 +26,8 @@ KNode *k_node_free(KNode *node) {
 // Initialize a KList.
 KList k_list_init() {
   KList list;
-  list.sentinel = k_node_alloc();
-  list.head = list.sentinel;
-  list.last = list.sentinel;
+  list.head = NULL;
+  list.tail = NULL;
   list.length = 0;
   return list;
 }
@@ -39,9 +38,17 @@ KList k_list_init() {
 KNode *k_list_append(KList *list, void *data) {
   KNode *new_node = k_node_alloc();
   new_node->data = data;
-  list->last->next = new_node;
-  new_node->prev = list->last;
-  list->last = new_node;
+
+  if (list->tail != NULL) {
+    list->tail->next = new_node;
+    new_node->prev = list->tail;
+    list->tail = new_node;
+  } else {
+    // First node in the list, point both list->tail and list->head to it.
+    list->tail = new_node;
+    list->head = new_node;
+  }
+
   list->length += 1;
   return new_node;
 }
@@ -49,12 +56,12 @@ KNode *k_list_append(KList *list, void *data) {
 
 // Free a KList.
 void k_list_free(KList *list) {
-  KNode *node = list->sentinel;
+  KNode *node = list->head;
   while (node) {
     KNode *tmp = node->next;
     k_node_free(node);
     node = tmp;
   }
-  list->head = list->last = list->sentinel = NULL;
+  list->head = list->tail = NULL;
   list->length = 0;
 }

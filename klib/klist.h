@@ -23,8 +23,7 @@ KNode *k_node_free(KNode *node);
 
 typedef struct _KList {
   KNode *head;
-  KNode *last;
-  KNode *sentinel;
+  KNode *tail;
   int length;
 } KList;
 
