@@ -92,10 +92,14 @@ void test_k_list_pop_head() {
   assert(list.length == 1);
   assert(popped_data == data1);
   assert(list.head == node2);
+
   popped_data = k_list_pop_head(&list);
   assert(list.length == 0);
   assert(popped_data == data2);
   assert(list.head == NULL);
+
+  popped_data = k_list_pop_head(&list);
+  assert(popped_data == NULL);
 }
 
 
