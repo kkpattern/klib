@@ -75,6 +75,28 @@ KNode *k_list_append(KList *list, void *data) {
 }
 
 
+// Pop out the head Node of a KList.
+// @return: The data in the head Node or NULL if there is no head Node.
+void *k_list_pop_head(KList *list) {
+  void *data = NULL;
+  if (list->head != NULL) {
+    KNode *head = list->head;
+    data = head->data;
+    if (list->head->next != NULL) {
+      list->head->next->prev = NULL;
+      list->head = list->head->next;
+    } else {
+      // Last node in the list, point both list->tail and list->head to NULL.
+      list->head = NULL;
+      list->tail = NULL;
+    }
+    k_node_free(head);
+    list->length -= 1;
+  }
+  return data;
+}
+
+
 // Free a KList.
 void k_list_free(KList *list) {
   KNode *node = list->head;

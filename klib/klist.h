@@ -42,6 +42,11 @@ KNode *k_list_append(KList *list, void *data);
 KNode *k_list_prepend(KList *list, void *data);
 
 
+// Pop out the head Node of a KList.
+// @return: The data in the head Node or NULL if there is no head Node.
+void *k_list_pop_head(KList *list);
+
+
 // Free a KList.
 void k_list_free(KList *list);
 

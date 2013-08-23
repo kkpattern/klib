@@ -81,6 +81,24 @@ void test_k_list_prepend() {
 }
 
 
+// k_list_pop_head() pop out the head KNode of a KList, return the data pointer
+void test_k_list_pop_head() {
+  KList list = k_list_init();
+  void *data1 = (void *)1;
+  KNode *node1 = k_list_append(&list, data1);
+  void *data2 = (void *)2;
+  KNode *node2 = k_list_append(&list, data2);
+  void *popped_data = k_list_pop_head(&list);
+  assert(list.length == 1);
+  assert(popped_data == data1);
+  assert(list.head == node2);
+  popped_data = k_list_pop_head(&list);
+  assert(list.length == 0);
+  assert(popped_data == data2);
+  assert(list.head == NULL);
+}
+
+
 // k_list_free() frees a list. Set head, last attributes to NULL. Set length to
 // 0.
 void test_k_list_free() {
@@ -97,6 +115,7 @@ int main() {
   test_k_list_init();
   test_k_list_append();
   test_k_list_prepend();
+  test_k_list_pop_head();
   test_k_list_free();
   return 0;
 }
