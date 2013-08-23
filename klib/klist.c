@@ -97,6 +97,28 @@ void *k_list_pop_head(KList *list) {
 }
 
 
+// Pop out the tail Node of a KList.
+// @return: The data in the tail Node or NULL if there is no tail Node.
+void *k_list_pop_tail(KList *list) {
+  void *data = NULL;
+  if (list->tail != NULL) {
+    KNode *tail = list->tail;
+    data = tail->data;
+    if (list->tail->prev != NULL) {
+      list->tail->prev->next = NULL;
+      list->tail = list->tail->prev;
+    } else {
+      // Last node in the list, point both list->tail and list->head to NULL.
+      list->head = NULL;
+      list->tail = NULL;
+    }
+    k_node_free(tail);
+    list->length -= 1;
+  }
+  return data;
+}
+
+
 // Free a KList.
 void k_list_free(KList *list) {
   KNode *node = list->head;

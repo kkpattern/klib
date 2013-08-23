@@ -47,6 +47,11 @@ KNode *k_list_prepend(KList *list, void *data);
 void *k_list_pop_head(KList *list);
 
 
+// Pop out the tail Node of a KList.
+// @return: The data in the tail Node or NULL if there is no tail Node.
+void *k_list_pop_tail(KList *list);
+
+
 // Free a KList.
 void k_list_free(KList *list);
 
