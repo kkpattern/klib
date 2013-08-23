@@ -33,6 +33,27 @@ KList k_list_init() {
 }
 
 
+// Prepend a KNode to KList with data.
+// @return: Pointer to the new prepended KNode.
+KNode *k_list_prepend(KList *list, void *data) {
+  KNode *new_node = k_node_alloc();
+  new_node->data = data;
+
+  if (list->head != NULL) {
+    list->head->prev = new_node;
+    new_node->next = list->head;
+    list->head = new_node;
+  } else {
+    // First node in the list, point both list->tail and list->head to it.
+    list->tail = new_node;
+    list->head = new_node;
+  }
+
+  list->length += 1;
+  return new_node;
+}
+
+
 // Append a KNode to KList with data.
 // @return: Pointer to the new appended KNode.
 KNode *k_list_append(KList *list, void *data) {

@@ -37,6 +37,11 @@ KList k_list_init();
 KNode *k_list_append(KList *list, void *data);
 
 
+// Prepend a KNode to KList with data.
+// @return: Pointer to the new prepended KNode.
+KNode *k_list_prepend(KList *list, void *data);
+
+
 // Free a KList.
 void k_list_free(KList *list);
 
