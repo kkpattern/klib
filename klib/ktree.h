@@ -6,8 +6,8 @@
 typedef struct _KTreeNode {
   void *key;
   void *value;
-  struct _KTree *left;
-  struct _KTree *right;
+  struct _KTreeNode *left;
+  struct _KTreeNode *right;
 } KTreeNode;
 
 
@@ -26,7 +26,7 @@ KTreeNode *k_tree_new_node(void *key, void *value);
 KTreeNode *k_tree_free_node(KTreeNode *node);
 
 
-typedef int KeyCompareFunction(void *key1, void *key1);
+typedef int KeyCompareFunction(void *key1, void *key2);
 typedef int ValueCompareFunction(void *value1, void *value2);
 
 
@@ -38,12 +38,18 @@ typedef struct _KTree {
 
 
 // Initialize a KTree
-// @in key_compare_function: The key compare function.
-// @in value_compare_function: The value compare function.
+// @in key_compare_function: The key compare function, the value can't be NULL.
+// @in value_compare_function: The value compare function, the value can't be
+//   NULL.
 // @out tree: Pointer to the tree that needs to be initialized.
-// @return: The new created KTree.
-int k_tree_init(KeyCompareFunction *key_compare_function,
-                ValueCompareFunction *value_compare_function);
+void k_tree_init(KeyCompareFunction *key_compare_function,
+                 ValueCompareFunction *value_compare_function,
+                 KTree *ktree);
+
+
+// Free a KTree
+// @in tree: Pointer to the tree that needs to be freed.
+void k_tree_free(KTree *ktree);
 
 
 #endif
