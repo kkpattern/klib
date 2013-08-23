@@ -140,6 +140,7 @@ void k_list_remove(KList *list, void *data) {
 
       list->length -= 1;
       k_node_free(tmp);
+      return;
     }
   }
 }
@@ -153,6 +154,7 @@ void k_list_remove_all(KList *list, void *data) {
     if (tmp->data != data) {
       tmp = tmp->next;
     } else {
+      KNode *next = tmp->next;
       if (tmp->prev != NULL) {
         tmp->prev->next = tmp->next;
       } else {
@@ -166,6 +168,7 @@ void k_list_remove_all(KList *list, void *data) {
 
       list->length -= 1;
       k_node_free(tmp);
+      tmp = next;
     }
   }
 }

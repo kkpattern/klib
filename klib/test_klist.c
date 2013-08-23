@@ -134,9 +134,11 @@ void test_k_list_remove() {
   KNode *node1 = k_list_append(&list, data1);
   void *data2 = (void *)2;
   KNode *node2 = k_list_append(&list, data2);
+  KNode *node3 = k_list_append(&list, data2);
   k_list_remove(&list, data2);
-  assert(list.length == 1);
-  assert(list.tail == node1);
+  assert(list.length == 2);
+  assert(list.tail == node3);
+  k_list_remove(&list, data2);
   k_list_remove(&list, data1);
   assert(list.length == 0);
   assert(list.head == NULL);
@@ -152,10 +154,10 @@ void test_k_list_remove_all() {
   void *data2 = (void *)2;
   KNode *node2 = k_list_append(&list, data2);
   KNode *node3 = k_list_append(&list, data2);
-  k_list_remove(&list, data2);
+  k_list_remove_all(&list, data2);
   assert(list.length == 1);
   assert(list.tail == node1);
-  k_list_remove(&list, data1);
+  k_list_remove_all(&list, data1);
   assert(list.length == 0);
   assert(list.head == NULL);
   assert(list.tail == NULL);
