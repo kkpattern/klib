@@ -145,6 +145,32 @@ void k_list_remove(KList *list, void *data) {
 }
 
 
+// Remove all the encounter of data in a KList.
+// @param data: The data to remove.
+void k_list_remove_all(KList *list, void *data) {
+  KNode *tmp = list->head;
+  while (tmp != NULL) {
+    if (tmp->data != data) {
+      tmp = tmp->next;
+    } else {
+      if (tmp->prev != NULL) {
+        tmp->prev->next = tmp->next;
+      } else {
+        list->head = tmp->next;
+      }
+      if (tmp->next != NULL) {
+        tmp->next->prev = tmp->prev;
+      } else {
+        list->tail = tmp->prev;
+      }
+
+      list->length -= 1;
+      k_node_free(tmp);
+    }
+  }
+}
+
+
 // Free a KList.
 void k_list_free(KList *list) {
   KNode *node = list->head;
