@@ -127,6 +127,23 @@ void test_k_list_pop_tail() {
 }
 
 
+// k_list_remove() removes the first encounter of data in a KList.
+void test_k_list_remove() {
+  KList list = k_list_init();
+  void *data1 = (void *)1;
+  KNode *node1 = k_list_append(&list, data1);
+  void *data2 = (void *)2;
+  KNode *node2 = k_list_append(&list, data2);
+  k_list_remove(&list, data2);
+  assert(list.length == 1);
+  assert(list.tail == node1);
+  k_list_remove(&list, data1);
+  assert(list.length == 0);
+  assert(list.head == NULL);
+  assert(list.tail == NULL);
+}
+
+
 // k_list_free() frees a list. Set head, last attributes to NULL. Set length to
 // 0.
 void test_k_list_free() {
@@ -146,6 +163,7 @@ int main() {
   test_k_list_prepend();
   test_k_list_pop_head();
   test_k_list_pop_tail();
+  test_k_list_remove();
   test_k_list_free();
   return 0;
 }

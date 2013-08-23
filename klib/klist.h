@@ -52,6 +52,11 @@ void *k_list_pop_head(KList *list);
 void *k_list_pop_tail(KList *list);
 
 
+// Remove the first encounter of data in a KList.
+// @param data: The data to remove.
+void k_list_remove(KList *list, void *data);
+
+
 // Free a KList.
 void k_list_free(KList *list);
 
