@@ -34,6 +34,19 @@ KList k_list_init() {
 }
 
 
+// Append a KNode to KList with data.
+// @return: Pointer to the new appended KNode.
+KNode *k_list_append(KList *list, void *data) {
+  KNode *new_node = k_node_alloc();
+  new_node->data = data;
+  list->last->next = new_node;
+  new_node->prev = list->last;
+  list->last = new_node;
+  list->length += 1;
+  return new_node;
+}
+
+
 // Free a KList.
 void k_list_free(KList *list) {
   KNode *node = list->sentinel;

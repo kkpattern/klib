@@ -39,6 +39,25 @@ void test_k_list_init() {
 }
 
 
+// k_list_free() append a new KNode to the KList, return the pointer to the
+// KNode and return it.
+void test_k_list_append() {
+  KList list = k_list_init();
+  void *data1 = (void *)1;
+  KNode *node1 = k_list_append(&list, data1);
+  assert(node1->data == data1);
+  assert(list.length == 1);
+  assert(node1->next == NULL);
+
+  void *data2 = (void *)2;
+  KNode *node2 = k_list_append(&list, data2);
+  assert(list.length == 2);
+  assert(node2->prev == node1);
+  assert(node1->next == node2);
+  k_list_free(&list);
+}
+
+
 // k_list_free() frees a list. Set sentinel, head, last attributes to NULL. Set
 // length to 0.
 void test_k_list_free() {
@@ -54,6 +73,7 @@ int main() {
   test_k_node_alloc();
   test_k_node_free();
   test_k_list_init();
+  test_k_list_append();
   test_k_list_free();
   return 0;
 }

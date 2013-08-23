@@ -34,7 +34,8 @@ KList k_list_init();
 
 
 // Append a KNode to KList with data.
-void k_list_append(KList *list, void *data);
+// @return: Pointer to the new appended KNode.
+KNode *k_list_append(KList *list, void *data);
 
 
 // Free a KList.
