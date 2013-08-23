@@ -26,11 +26,22 @@ KNode *k_node_free(KNode *node) {
 // Initialize a KList.
 KList k_list_init() {
   KList list;
-  list.head = NULL;
-  list.last = NULL;
-  list.sentinel.data = NULL;
-  list.sentinel.prev = NULL;
-  list.sentinel.next = NULL;
+  list.sentinel = k_node_alloc();
+  list.head = list.sentinel;
+  list.last = list.sentinel;
   list.length = 0;
   return list;
+}
+
+
+// Free a KList.
+void k_list_free(KList *list) {
+  KNode *node = list->sentinel;
+  while (node) {
+    KNode *tmp = node->next;
+    k_node_free(node);
+    node = tmp;
+  }
+  list->head = list->last = list->sentinel = NULL;
+  list->length = 0;
 }

@@ -24,13 +24,21 @@ KNode *k_node_free(KNode *node);
 typedef struct _KList {
   KNode *head;
   KNode *last;
-  KNode sentinel;
+  KNode *sentinel;
   int length;
 } KList;
 
 
 // Initialize a KList.
 KList k_list_init();
+
+
+// Append a KNode to KList with data.
+void k_list_append(KList *list, void *data);
+
+
+// Free a KList.
+void k_list_free(KList *list);
 
 
 #endif
